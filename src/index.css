@@ -21,11 +21,11 @@
   --background: #ffffff; /* Ultra-clean white background */
   --text-main: #0f172a; /* Deep midnight blue */
   --text-muted: #556677; /* Subtle grey-blue */
-  --glass: rgba(255, 255, 255, 0.85); /* High-contrast frosted glass */
-  --glass-border: rgba(0, 0, 0, 0.05); /* Very subtle grey border */
+  --glass: rgba(255, 255, 255, 0.45); /* More transparent for dots to show through */
+  --glass-border: rgba(0, 0, 0, 0.08); /* Slightly more defined border */
   --shadow: rgba(0, 0, 0, 0.05); /* Minimal non-tinted shadow for Light Mode */
   --text-shadow: none; /* Removed luminous glow from text to keep it sharp and professional */
-  --dot-color: rgba(0, 0, 0, 0.05); /* Ultra-subtle grey dots */
+  --dot-color: rgba(0, 0, 0, 0.12); /* Balanced grey dots */
 }
 
 * {
@@ -172,8 +172,8 @@ h1, h2, h3 {
 [data-theme='light'] .hero-avatar {
   /* Minimal shadow to keep it clean and non-bore */
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
-  /* Modern blending: multiply makes white image background transparent */
-  mix-blend-mode: multiply;
+  /* Removed multiply to stop dots from showing through the solids */
+  mix-blend-mode: normal; 
   opacity: 1; /* Fully opaque for a bold primary focus */
 }
 
