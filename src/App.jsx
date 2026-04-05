@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { RevealText } from './components/ui/RevealText';
+import { TextScramble } from "@/components/ui/text-scramble";
+import { RevealText } from "@/components/ui/reveal-text";
 
 const App = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -109,16 +110,16 @@ const App = () => {
               ))}
             </motion.p>
             
-            <div style={{ overflow: 'hidden', height: '2.8rem', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
-              <motion.h3 
+            <div style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>
+              <TextScramble
                 className="hero-role"
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.8, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
-                style={{ margin: 0 }}
+                as="h3"
+                duration={1.2}
+                speed={0.03}
+                trigger={true}
               >
                 Frontend Developer
-              </motion.h3>
+              </TextScramble>
             </div>
             
             <motion.div

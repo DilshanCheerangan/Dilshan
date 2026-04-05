@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+interface RevealTextProps {
+  text?: string;
+  textColor?: string;
+  overlayColor?: string;
+  fontSize?: string;
+  fontWeight?: number;
+  letterDelay?: number;
+  overlayDelay?: number;
+  overlayDuration?: number;
+  springDuration?: number;
+  style?: React.CSSProperties;
+  className?: string;
+}
+
 export function RevealText({
   text = "STUNNING",
   textColor = "inherit",
   overlayColor = "var(--primary)",
   fontSize = "clamp(4rem, 12vw, 11rem)",
-  fontWeight = 900,
+  fontWeight = 800,
   letterDelay = 0.08,
   overlayDelay = 0.05,
   overlayDuration = 0.4,
   springDuration = 600,
   style = {},
   className = "",
-}) {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+}: RevealTextProps) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [showRedText, setShowRedText] = useState(false);
   
   useEffect(() => {
@@ -53,7 +67,7 @@ export function RevealText({
               overflow: "hidden",
               lineHeight: 0.85,
               textTransform: "uppercase",
-              display: "inline-block", // crucial for transform scale to work properly!
+              display: "inline-block",
             }}
             initial={{ 
               scale: 0,
@@ -65,7 +79,7 @@ export function RevealText({
             }}
             whileHover={{ 
               scale: 1.15,
-              color: overlayColor, // Added simple color change on hover
+              color: overlayColor,
               transition: { delay: 0, type: "spring", stiffness: 400, damping: 10 }
             }}
             transition={{
@@ -76,7 +90,6 @@ export function RevealText({
               mass: 0.8,
             }}
           >
-            {/* Base text layer */}
             <motion.span 
               style={{
                 position: "relative",
@@ -89,7 +102,6 @@ export function RevealText({
               {letter}
             </motion.span>
             
-            {/* Overlay text layer that sweeps across each letter initially */}
             {showRedText && (
               <motion.span
                 style={{
