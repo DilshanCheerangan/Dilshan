@@ -530,11 +530,16 @@ h1, h2, h3 {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(0);
-    background: var(--background); /* Solid high-impact theme background */
+    /* Restore Liquid Water Aesthetic to Mobile Overlay */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(255, 255, 255, 0.04) 100%);
+    backdrop-filter: blur(8px) saturate(200%) contrast(110%);
+    -webkit-backdrop-filter: blur(8px) saturate(200%) contrast(110%);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   [data-theme='light'] .nav-links.open {
-    background: rgba(255, 255, 255, 0.98);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(255, 255, 255, 0.03) 100%);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .nav-link {
