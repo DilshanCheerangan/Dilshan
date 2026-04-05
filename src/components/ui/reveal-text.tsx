@@ -96,7 +96,7 @@ export function RevealText({
                 color: hoveredIndex === index ? overlayColor : textColor,
                 transition: "color 0.2s ease",
                 display: "inline-block",
-                textShadow: "0 15px 35px rgba(0,0,0,0.9), 0 5px 10px rgba(0,0,0,0.8)"
+                textShadow: "var(--text-shadow, 0 15px 35px rgba(0,0,0,0.9))"
               }}
             >
               {letter}
