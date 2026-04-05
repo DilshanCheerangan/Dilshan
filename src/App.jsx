@@ -56,19 +56,12 @@ const App = () => {
 
       {/* Hero Section */}
       <main className="hero-container">
-        {/* Paper Plane Decoration */}
-        <div className="paper-plane">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 3L3 10.5L11 13L13 21L21 3Z" stroke="#ccc" strokeWidth="1" />
-            <path d="M11 13L21 3" stroke="#ccc" strokeWidth="1" />
-          </svg>
-        </div>
 
         <div className="hero-content">
           <span className="hero-subtitle">MUHAMMED</span>
           
-          <div style={{ marginBottom: "1.5rem" }}>
-            <RevealText 
+          <div style={{ marginBottom: '1.5rem' }}>
+            <RevealText
               text="DILSHAN"
               textColor="var(--primary)"
               overlayColor="#ffffff"
