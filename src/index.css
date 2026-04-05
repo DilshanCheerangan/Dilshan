@@ -99,6 +99,7 @@ h1, h2, h3 {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2.5rem;
+  /* Structural Shell for Liquid Water - Decoupled for Android Fix */
   position: fixed;
   top: 1.5rem;
   left: 50%;
@@ -106,22 +107,27 @@ h1, h2, h3 {
   width: 90%;
   max-width: 1200px;
   z-index: 100;
-  /* Liquid Water Aesthetic with Android Safe Fallback */
-  background-color: rgba(18, 25, 41, 0.75); /* Deep baseline always-visible fallback */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.12) 100%);
-  backdrop-filter: blur(40px) saturate(220%) contrast(110%);
-  -webkit-backdrop-filter: blur(40px) saturate(220%) contrast(110%);
-  transform: translateZ(0); /* Hardware hint for Android to prioritized blur core */
-  will-change: backdrop-filter;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-bottom-color: rgba(255, 255, 255, 0.05);
-  border-right-color: rgba(255, 255, 255, 0.05);
   border-radius: 50px;
+  overflow: hidden; /* Clips the blurred pseudo-element */
   box-shadow: 
-    0 15px 35px var(--shadow),
+    0 15px 35px rgba(0, 0, 0, 0.3),
     0 5px 15px rgba(var(--primary-rgb), 0.12),
     inset 0 1px 3px rgba(255, 255, 255, 0.6),
     inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  isolation: isolate; /* Creates a new stacking context for children vs pseudo */
+}
+
+.nav-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* Liquid Water refraction logic moved here to force Android rendering */
+  background-color: rgba(18, 25, 41, 0.75);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.12) 100%);
+  backdrop-filter: blur(40px) saturate(220%) contrast(110%);
+  -webkit-backdrop-filter: blur(40px) saturate(220%) contrast(110%);
+  transform: translateZ(0); /* Hardware hint inside the refraction layer */
 }
 
 .nav-logo {
@@ -532,23 +538,36 @@ h1, h2, h3 {
   }
   
   .nav-links.open {
+    /* Deep Frosted Water Mobile Overlay - Hardware Partitioned for Android */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     opacity: 1;
     pointer-events: auto;
-    /* Deep Frosted Water Mobile Overlay - High Contast Safe Fallback */
-    background-color: rgba(10, 15, 30, 0.85); /* Heavy fallback to ensure readability without blur */
+    transform: translateX(0);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .nav-links.open::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: rgba(10, 15, 30, 0.85); 
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 40%, rgba(255, 255, 255, 0.08) 100%);
     backdrop-filter: blur(60px) saturate(220%) contrast(110%);
     -webkit-backdrop-filter: blur(60px) saturate(220%) contrast(110%);
-    border-left: 1px solid rgba(255, 255, 255, 0.25);
-    transform: translateX(0) translateZ(0);
+    transform: translateZ(0);
   }
 
-  [data-theme='light'] .nav-links.open {
-    background-color: rgba(255, 255, 255, 0.9); /* Heavy light-mode fallback */
+  [data-theme='light'] .nav-links.open::before {
+    background-color: rgba(255, 255, 255, 0.9);
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(60px) saturate(180%) contrast(110%);
     -webkit-backdrop-filter: blur(60px) saturate(180%) contrast(110%);
-    border-left: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .nav-link {
@@ -824,20 +843,12 @@ h1, h2, h3 {
 }
 
 .about-stat-card {
-  /* Deep Refractive Water effect with Safe Fallback */
-  background-color: rgba(18, 25, 41, 0.6); /* Heavy visible fallback */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.1) 100%);
-  backdrop-filter: blur(35px) saturate(200%) contrast(110%);
-  -webkit-backdrop-filter: blur(35px) saturate(200%) contrast(110%);
-  transform: translateZ(0); /* Hardware hint for Android to wake up filter engine */
-  will-change: backdrop-filter;
-  
-  /* Specular rim lighting mimicing water tension */
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-bottom-color: rgba(255, 255, 255, 0.05);
-  border-right-color: rgba(255, 255, 255, 0.05);
+  /* Hardware Partitioned Liquid Glass for Android Fix */
+  position: relative;
+  overflow: hidden;
   border-radius: 20px;
-  
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   padding: 1.4rem 2rem;
   display: flex;
   align-items: center;
@@ -852,6 +863,19 @@ h1, h2, h3 {
     inset 0 -1px 2px rgba(0, 0, 0, 0.2);
     
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.about-stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: rgba(18, 25, 41, 0.6);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.1) 100%);
+  backdrop-filter: blur(35px) saturate(200%) contrast(110%);
+  -webkit-backdrop-filter: blur(35px) saturate(200%) contrast(110%);
+  transform: translateZ(0);
+  will-change: backdrop-filter;
 }
 
 .about-stat-card:hover {
