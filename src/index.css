@@ -14,6 +14,14 @@
   --glass-border: rgba(255, 255, 255, 0.08);
 }
 
+[data-theme='light'] {
+  --background: #f8faff;
+  --text-main: #0a0c10;
+  --text-muted: #4a5568;
+  --glass: rgba(0, 0, 0, 0.02);
+  --glass-border: rgba(0, 0, 0, 0.06);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,9 +31,10 @@
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background-color: var(--background);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(rgba(0, 163, 255, 0.1) 1.5px, transparent 1.5px);
   background-size: 25px 25px;
   color: var(--text-main);
+  transition: background-color 0.4s ease, color 0.4s ease;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;

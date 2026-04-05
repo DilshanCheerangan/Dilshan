@@ -1,11 +1,23 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Magnetic from "@/components/ui/magnetic";
+import ThemeToggle from "@/components/ui/theme-toggle";
 import { RevealText } from "@/components/ui/reveal-text";
 
 const App = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('portfolio-theme') || 'dark';
+    }
+    return 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolio-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -57,6 +69,10 @@ const App = () => {
           <a href="#about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</a>
           <a href="#projects" className="nav-link" onClick={() => setIsMenuOpen(false)}>Projects</a>
           <a href="#blog" className="nav-link" onClick={() => setIsMenuOpen(false)}>Blog</a>
+          <ThemeToggle 
+            theme={theme} 
+            toggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
+          />
           <a href="#hire" className="btn-hire" onClick={() => setIsMenuOpen(false)}>Hire Me</a>
         </div>
       </motion.nav>
