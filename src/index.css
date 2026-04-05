@@ -479,4 +479,21 @@ h1, h2, h3 {
     left: 5%;
     width: 80px;
   }
+
+  /* Override interactive dots with autonomous hover */
+  .dots-bright {
+    mask-image: radial-gradient(circle 250px at top left, black 0%, transparent 100%) !important;
+    -webkit-mask-image: radial-gradient(circle 250px at top left, black 0%, transparent 100%) !important;
+    mask-size: 100vw 100vh !important;
+    mask-repeat: no-repeat !important;
+    animation: mask-wander 10s infinite alternate ease-in-out !important;
+  }
+}
+
+@keyframes mask-wander {
+  0% { mask-position: -10vw -10vh; -webkit-mask-position: -10vw -10vh; }
+  25% { mask-position: 80vw 30vh; -webkit-mask-position: 80vw 30vh; }
+  50% { mask-position: 40vw 60vh; -webkit-mask-position: 40vw 60vh; }
+  75% { mask-position: -20vw 90vh; -webkit-mask-position: -20vw 90vh; }
+  100% { mask-position: 60vw 100vh; -webkit-mask-position: 60vw 100vh; }
 }
