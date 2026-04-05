@@ -36,19 +36,7 @@ export default function AboutSection() {
       {/* ── Animated grid lines ── */}
       <div className="about-grid" aria-hidden="true" />
 
-      {/* ── Top Wave Divider (sits on the seam with hero) ── */}
-      <div className="about-divider" aria-hidden="true">
-        <svg
-          viewBox="0 0 1440 80"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z"
-            fill="var(--hero-bg, #000)"
-          />
-        </svg>
-      </div>
+      {/* No separate divider needed — the curve is handled by clip-path in CSS */}
 
       {/* ── Main Content ── */}
       <motion.div
@@ -80,7 +68,7 @@ export default function AboutSection() {
             ))}
           </motion.div>
 
-          {/* Stats / Highlights card */}
+          {/* Stats / Highlights cards */}
           <motion.div className="about-stats" variants={containerVariants}>
             {stats.map((s, i) => (
               <motion.div key={i} className="about-stat-card" variants={itemVariants}>
@@ -88,18 +76,8 @@ export default function AboutSection() {
                 <span className="about-stat-label">{s.label}</span>
               </motion.div>
             ))}
-
-            {/* CTA inside stats column */}
-            <motion.a
-              href="#hire"
-              className="about-cta"
-              variants={itemVariants}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Let's Work Together ↗
-            </motion.a>
           </motion.div>
+
         </div>
       </motion.div>
     </section>

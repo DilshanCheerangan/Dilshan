@@ -636,13 +636,14 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   padding: 8rem 10% 6rem;
-  /* 3D lift shadow to separate from hero below */
-  box-shadow: 0 -40px 80px rgba(0, 0, 0, 0.6);
+  /* Smooth concave curve at the very top */
+  clip-path: ellipse(120% 100% at 50% 100%);
+  margin-top: -60px; /* Pull up so clip-path overlaps hero */
+  padding-top: 120px;
 }
 
 [data-theme='light'] .about-section {
   --about-bg: #f8faff;
-  box-shadow: 0 -40px 80px rgba(0, 100, 255, 0.08);
 }
 
 /* ── Wave Divider at top edge ── */
@@ -726,7 +727,7 @@ h1, h2, h3 {
     linear-gradient(var(--grid-line, rgba(255,255,255,0.03)) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line, rgba(255,255,255,0.03)) 1px, transparent 1px);
   background-size: 60px 60px;
-  animation: grid-shift 30s linear infinite;
+  /* Static — no animation */
   pointer-events: none;
 }
 
