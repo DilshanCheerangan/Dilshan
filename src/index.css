@@ -148,7 +148,7 @@ h1, h2, h3 {
 .hero-content {
   flex: 1;
   z-index: 10;
-  margin-top: 5vh; /* Push content naturally into the center/bottom, fixing empty bottom space */
+  margin-top: 12vh; /* Lowered the entire block for a more balanced vertical flow */
 }
 
 
