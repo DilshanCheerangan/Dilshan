@@ -18,13 +18,14 @@
 
 [data-theme='light'] {
   --primary: #0066ff; /* More vibrant Royal Blue for Light Mode */
-  --background: #f1f5f9; /* Premium Slate/White */
-  --text-main: #0f172a; /* Midnight Blue */
-  --text-muted: #334155; /* Darker slate for legibility */
-  --glass: rgba(255, 255, 255, 0.75); /* Higher opacity for light modo */
-  --glass-border: rgba(255, 255, 255, 0.9);
-  --shadow: rgba(0, 102, 255, 0.12); /* Soft blue-tinted elevation */
-  --text-shadow: 0 10px 25px rgba(0, 102, 255, 0.2); /* Luminous blue glow */
+  --background: #ffffff; /* Ultra-clean white background */
+  --text-main: #0f172a; /* Deep midnight blue */
+  --text-muted: #556677; /* Subtle grey-blue */
+  --glass: rgba(255, 255, 255, 0.85); /* High-contrast frosted glass */
+  --glass-border: rgba(0, 0, 0, 0.05); /* Very subtle grey border */
+  --shadow: rgba(0, 0, 0, 0.05); /* Minimal non-tinted shadow for Light Mode */
+  --text-shadow: none; /* Removed luminous glow from text to keep it sharp and professional */
+  --dot-color: rgba(0, 0, 0, 0.05); /* Ultra-subtle grey dots */
 }
 
 * {
@@ -169,11 +170,11 @@ h1, h2, h3 {
 }
 
 [data-theme='light'] .hero-avatar {
-  /* Reduced shadows for a cleaner, less 'trash' look */
-  filter: drop-shadow(0 15px 30px rgba(0, 102, 255, 0.08));
+  /* Minimal shadow to keep it clean and non-bore */
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
   /* Modern blending: multiply makes white image background transparent */
   mix-blend-mode: multiply;
-  opacity: 0.95; /* Slight transparency for background dot bleed-through */
+  opacity: 1; /* Pure visibility on clean white */
 }
 
 /* Hero Section */
@@ -371,9 +372,8 @@ h1, h2, h3 {
 }
 
 [data-theme='light'] .bg-sparkles {
-  background-image: radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.12) 0%, transparent 50%),
-                    radial-gradient(circle at 70% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 60%);
-  opacity: 0.9;
+  background-image: none; /* Removed blue bloom to keep background pure white */
+  opacity: 0;
 }
 
 /* Interactive Bright Dots Overlay */
