@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Magnetic from "@/components/ui/magnetic";
 import { RevealText } from "@/components/ui/reveal-text";
 
 const App = () => {
@@ -139,7 +140,9 @@ const App = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 2.2 }}
             >
-              <a href="#work" className="btn-work">View My Work</a>
+              <Magnetic strength={0.35}>
+                <a href="#work" className="btn-work">View My Work</a>
+              </Magnetic>
             </motion.div>
           </div>
         </div>
