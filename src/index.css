@@ -155,7 +155,7 @@ h1, h2, h3 {
 .hero-subtitle {
   font-family: 'Outfit', sans-serif;
   color: var(--text-main);
-  font-size: 1.5rem;
+  font-size: 1.8rem; /* Increased from 1.5rem for better balance */
   text-transform: uppercase;
   font-weight: 800;
   margin-bottom: 1rem;
