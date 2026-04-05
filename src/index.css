@@ -122,15 +122,16 @@ h1, h2, h3 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  /* Liquid Water refraction logic moved here to force Android rendering */
-  background-color: rgba(18, 25, 41, 0.75);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.12) 100%);
-  backdrop-filter: blur(40px) saturate(220%) contrast(110%);
-  -webkit-backdrop-filter: blur(40px) saturate(220%) contrast(110%);
-  transform: translateZ(0); /* Hardware hint inside the refraction layer */
+  /* Crystal Clear Water for Desktop */
+  background-color: rgba(18, 25, 41, 0.4); 
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(12px) saturate(180%) contrast(110%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%) contrast(110%);
+  transform: translateZ(0); 
+[data-theme='light'] .nav-container::before {
+  background-color: rgba(255, 255, 255, 0.65);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.04) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(0, 0, 0, 0.03) 100%);
 }
-
-.nav-logo {
   font-family: 'Outfit', sans-serif;
   font-weight: 800;
   font-size: 1.3rem;
@@ -479,9 +480,15 @@ h1, h2, h3 {
     height: clamp(25rem, 60vh, 50rem);
   }
   
-  .nav-container {
-    width: 95%;
-    padding: 1rem 1.5rem;
+  .nav-container::before {
+    /* Deep Frosted Water for Mobile Legibility */
+    background-color: rgba(18, 25, 41, 0.85); 
+    backdrop-filter: blur(45px) saturate(220%) contrast(110%);
+    -webkit-backdrop-filter: blur(45px) saturate(220%) contrast(110%);
+  }
+
+  [data-theme='light'] .nav-container::before {
+    background-color: rgba(255, 255, 255, 0.9);
   }
   
   .nav-links {
@@ -870,15 +877,17 @@ h1, h2, h3 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-color: rgba(18, 25, 41, 0.6);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.1) 100%);
-  backdrop-filter: blur(35px) saturate(200%) contrast(110%);
-  -webkit-backdrop-filter: blur(35px) saturate(200%) contrast(110%);
+  /* Crystal Clear Glass for Desktop */
+  background-color: rgba(18, 25, 41, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(14px) saturate(180%) contrast(110%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%) contrast(110%);
   transform: translateZ(0);
   will-change: backdrop-filter;
+[data-theme='light'] .about-stat-card::before {
+  background-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.04) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(0, 0, 0, 0.03) 100%);
 }
-
-.about-stat-card:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 
     0 20px 45px rgba(0, 0, 0, 0.4),
@@ -911,6 +920,17 @@ h1, h2, h3 {
   .about-section {
     padding: 2rem 6% 4rem;
     padding-top: 15vh; /* Balanced specifically for mobile taller viewports */
+  }
+
+  .about-stat-card::before {
+    /* Heavy Water for Mobile Tabs */
+    background-color: rgba(18, 25, 41, 0.75); 
+    backdrop-filter: blur(35px) saturate(220%) contrast(110%);
+    -webkit-backdrop-filter: blur(35px) saturate(220%) contrast(110%);
+  }
+
+  [data-theme='light'] .about-stat-card::before {
+    background-color: rgba(255, 255, 255, 0.85);
   }
 
   .about-body {
