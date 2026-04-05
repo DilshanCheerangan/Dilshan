@@ -64,44 +64,71 @@ const App = () => {
       <main className="hero-container">
 
         <div className="hero-content">
-          <div style={{ position: 'relative', height: '2rem', marginBottom: '0.5rem' }}>
-            <RevealText
-              text="MUHAMMED"
-              textColor="#ffffff"
-              overlayColor="var(--primary)"
-              fontSize="1.3rem"
-              letterDelay={0.05}
-            />
-          </div>
-          
-          <div style={{ marginBottom: '1.5rem' }}>
-            <RevealText
-              text="DILSHAN"
-              textColor="var(--primary)"
-              overlayColor="#ffffff"
-              fontSize="clamp(4rem, 12vw, 11rem)"
-              letterDelay={0.1}
-            />
-          </div>
-          
-          <motion.div 
-            className="hero-description"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
+          <motion.span 
+            className="hero-subtitle"
+            initial={{ opacity: 0, letterSpacing: "-10px", filter: "blur(10px)" }}
+            animate={{ opacity: 1, letterSpacing: "2px", filter: "blur(0px)" }}
+            transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            style={{ display: 'block' }}
           >
-            <p>I create exceptional web experiences</p>
-            <div style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>
-               <RevealText
-                text="Frontend Developer"
-                textColor="#ffffff"
-                overlayColor="var(--primary)"
-                fontSize="1.8rem"
-                letterDelay={0.04}
-              />
+            MUHAMMED
+          </motion.span>
+          
+          <RevealText
+            text="DILSHAN"
+            textColor="var(--primary)"
+            overlayColor="#ffffff"
+            fontSize="clamp(4rem, 12vw, 11rem)"
+            className="hero-title"
+            letterDelay={0.1}
+          />
+          
+          <div className="hero-description">
+            <motion.p
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.08, delayChildren: 1.2 }
+                }
+              }}
+            >
+              {"I create exceptional web experiences".split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                  style={{ display: 'inline-block', marginRight: '0.3rem' }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.p>
+            
+            <div style={{ overflow: 'hidden', height: '2.8rem', marginTop: '0.5rem', marginBottom: '1.5rem' }}>
+              <motion.h3 
+                className="hero-role"
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.8, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+                style={{ margin: 0 }}
+              >
+                Frontend Developer
+              </motion.h3>
             </div>
-            <a href="#work" className="btn-work">View My Work</a>
-          </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 2.2 }}
+            >
+              <a href="#work" className="btn-work">View My Work</a>
+            </motion.div>
+          </div>
         </div>
 
         <motion.div 

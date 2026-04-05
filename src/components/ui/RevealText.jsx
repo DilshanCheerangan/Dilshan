@@ -6,10 +6,13 @@ export function RevealText({
   textColor = "inherit",
   overlayColor = "var(--primary)",
   fontSize = "clamp(4rem, 12vw, 11rem)",
+  fontWeight = 900,
   letterDelay = 0.08,
   overlayDelay = 0.05,
   overlayDuration = 0.4,
   springDuration = 600,
+  style = {},
+  className = "",
 }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [showRedText, setShowRedText] = useState(false);
@@ -26,7 +29,15 @@ export function RevealText({
   }, [text.length, letterDelay, springDuration]);
 
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+    <div 
+      className={className} 
+      style={{ 
+        display: "flex", 
+        alignItems: "center", 
+        position: "relative",
+        ...style 
+      }}
+    >
       <div style={{ display: "flex" }}>
         {text.split("").map((letter, index) => (
           <motion.span
@@ -35,7 +46,7 @@ export function RevealText({
             onMouseLeave={() => setHoveredIndex(null)}
             style={{
               fontSize: fontSize,
-              fontWeight: 900,
+              fontWeight: fontWeight,
               letterSpacing: "-2px",
               cursor: "pointer",
               position: "relative",
