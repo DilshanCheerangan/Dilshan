@@ -352,10 +352,10 @@ h1, h2, h3 {
   width: auto;
   z-index: 5;
   filter: drop-shadow(0 20px 60px var(--shadow));
-  /* Circular/Radial mask with a larger solid core (65%) for a bold feel */
-  mask-image: radial-gradient(circle at 50% 40%, black 65%, transparent 95%);
-  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 65%, transparent 95%);
-  opacity: 1; /* Ensured full opacity as requested */
+  /* Modern Edge Blending: Solid Sides, Faded Bottom */
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  opacity: 1; 
   transition: filter 0.4s ease, opacity 0.4s ease;
 }
 
@@ -576,6 +576,11 @@ h1, h2, h3 {
     font-size: 1rem;
   }
 
+
+  /* Clear background glows on mobile to prevent "ghost shadows" */
+  .bg-sparkles {
+    opacity: 0 !important;
+  }
 
   /* Override interactive dots with autonomous hover */
   .dots-bright {
