@@ -163,6 +163,11 @@ h1, h2, h3 {
   color: var(--primary);
 }
 
+[data-theme='light'] .hero-avatar {
+  filter: drop-shadow(0 20px 40px rgba(0, 102, 255, 0.15)) 
+          drop-shadow(0 10px 10px rgba(0, 102, 255, 0.1));
+}
+
 /* Hero Section */
 .hero-container {
   height: 100vh;
@@ -385,7 +390,7 @@ h1, h2, h3 {
 }
 
 [data-theme='light'] .dots-bright {
-  --dots-opacity: 0.3;
+  --dots-opacity: 0.6; /* Increased visibility as requested */
 }
 
 /* =========================================
