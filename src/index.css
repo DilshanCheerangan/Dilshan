@@ -45,6 +45,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overflow-y: auto; /* Allow page scrolling */
 }
 
 [data-theme='light'] {
@@ -62,7 +63,20 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
+  /* Remove overflow:hidden so page can scroll */
+}
+
+/* ─── Scroll Architecture ─── */
+.scroll-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-sticky-wrap {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 1; /* Hero sits behind About section */
 }
 
 /* Navbar */
@@ -605,4 +619,256 @@ h1, h2, h3 {
   50% { mask-position: 40vw 60vh; -webkit-mask-position: 40vw 60vh; }
   75% { mask-position: -20vw 90vh; -webkit-mask-position: -20vw 90vh; }
   100% { mask-position: 60vw 100vh; -webkit-mask-position: 60vw 100vh; }
+}
+
+/* =========================================
+   ABOUT SECTION
+   ========================================= */
+
+.about-section {
+  position: relative;
+  z-index: 10; /* Slides over the sticky hero */
+  min-height: 100vh;
+  background: var(--about-bg, #050a14);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 10% 6rem;
+  /* 3D lift shadow to separate from hero below */
+  box-shadow: 0 -40px 80px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme='light'] .about-section {
+  --about-bg: #f8faff;
+  box-shadow: 0 -40px 80px rgba(0, 100, 255, 0.08);
+}
+
+/* ── Wave Divider at top edge ── */
+.about-divider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  z-index: 2;
+}
+
+.about-divider svg {
+  width: 100%;
+  height: 80px;
+  display: block;
+}
+
+/* In light mode the wave matches the light hero background */
+[data-theme='light'] .about-divider path {
+  fill: #f1f5f9;
+}
+
+/* ── Animated Background Orbs ── */
+.about-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+  animation: orb-drift 18s ease-in-out infinite;
+}
+
+.about-orb--1 {
+  width: 600px;
+  height: 600px;
+  background: var(--primary);
+  top: -10%;
+  left: -10%;
+  animation-duration: 22s;
+}
+
+.about-orb--2 {
+  width: 450px;
+  height: 450px;
+  background: #6c1de8;
+  bottom: 5%;
+  right: -8%;
+  animation-duration: 17s;
+  animation-delay: -6s;
+}
+
+.about-orb--3 {
+  width: 300px;
+  height: 300px;
+  background: var(--primary);
+  top: 50%;
+  left: 45%;
+  animation-duration: 25s;
+  animation-delay: -12s;
+  opacity: 0.1;
+}
+
+[data-theme='light'] .about-orb {
+  opacity: 0.07;
+}
+
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(3%, 5%) scale(1.05); }
+  66%       { transform: translate(-4%, -3%) scale(0.95); }
+}
+
+/* ── Subtle Animated Grid ── */
+.about-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--grid-line, rgba(255,255,255,0.03)) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line, rgba(255,255,255,0.03)) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-shift 30s linear infinite;
+  pointer-events: none;
+}
+
+[data-theme='light'] .about-grid {
+  --grid-line: rgba(0, 80, 255, 0.04);
+}
+
+@keyframes grid-shift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+/* ── Content layout ── */
+.about-content {
+  position: relative;
+  z-index: 5;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.about-label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.about-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-main);
+  margin-bottom: 3.5rem;
+}
+
+.about-heading--accent {
+  color: var(--primary);
+}
+
+/* ── Two-column body ── */
+.about-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-bio p {
+  font-size: 1.1rem;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+
+/* ── Stat cards ── */
+.about-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.about-stat-card {
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.4rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  box-shadow: 0 8px 30px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-stat-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 40px var(--shadow), 0 0 0 1px rgba(0, 163, 255, 0.15);
+}
+
+.about-stat-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+  min-width: 70px;
+}
+
+.about-stat-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── CTA inside stats column ── */
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 1.1rem 2.5rem;
+  border-radius: 50px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 163, 255, 0.35);
+}
+
+.about-cta:hover {
+  box-shadow: 0 16px 40px rgba(0, 163, 255, 0.5);
+}
+
+/* ── About Section Responsive ── */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 6rem 6% 4rem;
+  }
+
+  .about-body {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-heading {
+    font-size: 2.8rem;
+  }
 }

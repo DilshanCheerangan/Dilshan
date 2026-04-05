@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Magnetic from "@/components/ui/magnetic";
 import ThemeToggle from "@/components/ui/theme-toggle";
 import { RevealText } from "@/components/ui/reveal-text";
+import AboutSection from "@/components/sections/AboutSection";
 
 const App = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -77,108 +78,113 @@ const App = () => {
         </div>
       </motion.nav>
 
-      {/* Hero Section */}
-      <main className="hero-container">
+      {/* ── Scroll Container ── */}
+      <div className="scroll-wrapper">
 
-        <div className="hero-content">
-          <motion.span
-            className="hero-subtitle"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            style={{
-              display: 'block',
-              paddingLeft: '4px' // Subtle adjustment to align with the 'D' in DILSHAN
-            }}
-          >
-            MUHAMMED
-          </motion.span>
-
-          <RevealText
-            text="DILSHAN"
-            textColor="var(--primary)"
-            overlayColor="var(--text-main)"
-            fontSize="clamp(4rem, 12vw, 11rem)"
-            className="hero-title"
-            letterDelay={0.1}
-          />
-
-          <div className="hero-description">
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.08, delayChildren: 1.2 }
-                }
-              }}
-            >
-              {"I’m a frontend developer focused on building fast, modern, and user-friendly web experiences.  I enjoy turning ideas into clean, interactive interfaces that feel smooth and intuitive.".split(" ").map((word, i) => (
-                <motion.span
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 }
-                  }}
-                  style={{ display: 'inline-block', marginRight: '0.3rem' }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </motion.p>
-
-            <div style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>
-              <motion.h3
-                className="hero-role"
-                initial={{ opacity: 0, letterSpacing: "-8px", filter: "blur(12px)" }}
-                animate={{
-                  opacity: 1,
-                  letterSpacing: "2px",
-                  filter: "blur(0px)",
-                  scale: [1, 1.02, 1]
-                }}
-                transition={{
-                  opacity: { duration: 1.5, delay: 1.6 },
-                  scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-                  ease: [0.16, 1, 0.3, 1]
-                }}
-                style={{ margin: 0 }}
+        {/* ── Hero sticky wrap (About slides over it) ── */}
+        <div className="hero-sticky-wrap" id="home">
+          <main className="hero-container">
+            <div className="hero-content">
+              <motion.span
+                className="hero-subtitle"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                style={{ display: 'block', paddingLeft: '4px' }}
               >
-                Frontend Developer
-              </motion.h3>
+                MUHAMMED
+              </motion.span>
+
+              <RevealText
+                text="DILSHAN"
+                textColor="var(--primary)"
+                overlayColor="var(--text-main)"
+                fontSize="clamp(4rem, 12vw, 11rem)"
+                className="hero-title"
+                letterDelay={0.1}
+              />
+
+              <div className="hero-description">
+                <motion.p
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: { staggerChildren: 0.08, delayChildren: 1.2 }
+                    }
+                  }}
+                >
+                  {"I'm a frontend developer focused on building fast, modern, and user-friendly web experiences.  I enjoy turning ideas into clean, interactive interfaces that feel smooth and intuitive.".split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0 }
+                      }}
+                      style={{ display: 'inline-block', marginRight: '0.3rem' }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </motion.p>
+
+                <div style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>
+                  <motion.h3
+                    className="hero-role"
+                    initial={{ opacity: 0, letterSpacing: "-8px", filter: "blur(12px)" }}
+                    animate={{
+                      opacity: 1,
+                      letterSpacing: "2px",
+                      filter: "blur(0px)",
+                      scale: [1, 1.02, 1]
+                    }}
+                    transition={{
+                      opacity: { duration: 1.5, delay: 1.6 },
+                      scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                      ease: [0.16, 1, 0.3, 1]
+                    }}
+                    style={{ margin: 0 }}
+                  >
+                    Frontend Developer
+                  </motion.h3>
+                </div>
+
+                <motion.div
+                  style={{ marginTop: '3rem' }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 2.2 }}
+                >
+                  <Magnetic strength={0.35}>
+                    <a href="#about" className="btn-work">View My Work</a>
+                  </Magnetic>
+                </motion.div>
+              </div>
             </div>
 
             <motion.div
-              style={{ marginTop: '3rem' }} // Increased margin to lower the button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2.2 }}
+              className="hero-visual"
+              initial={{ opacity: 0, scale: 0.9, x: 50 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Magnetic strength={0.35}>
-                <a href="#work" className="btn-work">View My Work</a>
-              </Magnetic>
+              <img
+                src="/hero/boarderline_nobg.png"
+                alt="Muhammed Dilshan"
+                className="hero-avatar"
+              />
             </motion.div>
-          </div>
+          </main>
         </div>
 
-        <motion.div
-          className="hero-visual"
-          initial={{ opacity: 0, scale: 0.9, x: 50 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <img
-            src="/hero/boarderline_nobg.png"
-            alt="Muhammed Dilshan"
-            className="hero-avatar"
-          />
-        </motion.div>
-      </main>
+        {/* ── About Section (rises from bottom over hero) ── */}
+        <AboutSection />
+
+      </div>
     </div>
   );
 };
 
 export default App;
-
