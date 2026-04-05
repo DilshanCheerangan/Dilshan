@@ -97,7 +97,7 @@ const App = () => {
           <RevealText
             text="DILSHAN"
             textColor="var(--primary)"
-            overlayColor="#ffffff"
+            overlayColor="var(--text-main)"
             fontSize="clamp(4rem, 12vw, 11rem)"
             className="hero-title"
             letterDelay={0.1}
