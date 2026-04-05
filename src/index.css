@@ -128,12 +128,13 @@ h1, h2, h3 {
   backdrop-filter: blur(12px) saturate(180%) contrast(110%);
   -webkit-backdrop-filter: blur(12px) saturate(180%) contrast(110%);
   transform: translateZ(0); 
+}
 [data-theme='light'] .nav-container::before {
   background-color: rgba(255, 255, 255, 0.65);
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.04) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(0, 0, 0, 0.03) 100%);
-}
+}.nav-logo {
   font-family: 'Outfit', sans-serif;
-  font-weight: 800;
+  font-weight: 800; /* Robust Bold */
   font-size: 1.3rem;
   text-transform: uppercase;
   color: var(--text-main);
@@ -142,6 +143,12 @@ h1, h2, h3 {
 
 .nav-logo span {
   color: var(--text-main);
+  font-weight: 800; /* Also bold the span */
+}
+
+/* Ensure Mobile Menu is hidden globally on desktop */
+.nav-links-mobile {
+  display: none;
 }
 
 .nav-links {
@@ -541,7 +548,7 @@ h1, h2, h3 {
     left: 0;
     width: 100vw;
     height: 100vh;
-    display: none; /* Hidden by default */
+    display: none; /* Controlled by .open class below */
     flex-direction: column;
     justify-content: center;
     align-items: center;
