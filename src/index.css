@@ -15,11 +15,11 @@
 }
 
 [data-theme='light'] {
-  --background: #f8faff;
-  --text-main: #0a0c10;
-  --text-muted: #4a5568;
-  --glass: rgba(0, 0, 0, 0.02);
-  --glass-border: rgba(0, 0, 0, 0.06);
+  --background: #f1f5f9; /* Softer, premium light background */
+  --text-main: #0f172a; /* Deep midnight blue for better legibility */
+  --text-muted: #475569;
+  --glass: rgba(255, 255, 255, 0.65); /* High-contrast frosted glass */
+  --glass-border: rgba(255, 255, 255, 0.8);
 }
 
 * {
@@ -68,14 +68,14 @@ h1, h2, h3 {
   max-width: 1200px;
   z-index: 100;
   /* Advanced Liquid Glassmorphism Effect */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+  background: var(--glass);
   backdrop-filter: blur(28px) saturate(220%);
   -webkit-backdrop-filter: blur(28px) saturate(220%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--glass-border);
   border-radius: 50px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
-              inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
-              inset 0 -1px 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 
+              inset 0 1px 1px 0 rgba(255, 255, 255, 0.3),
+              inset 0 -1px 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .nav-logo {
@@ -148,8 +148,14 @@ h1, h2, h3 {
 
 .btn-hire:hover {
   transform: translateY(-3px) scale(1.04);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 163, 255, 0.2);
+  background: rgba(0, 163, 255, 0.1); /* Subtle blue tint on hover */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 163, 255, 0.1);
+}
+
+[data-theme='light'] .btn-hire {
+  background: rgba(0, 163, 255, 0.05);
+  border: 1px solid rgba(0, 163, 255, 0.3);
+  color: var(--primary);
 }
 
 /* Hero Section */
@@ -269,6 +275,12 @@ h1, h2, h3 {
               border 0.3s ease;
 }
 
+[data-theme='light'] .btn-work {
+  background: rgba(0, 163, 255, 0.08); /* More subtle background for light mode */
+  border: 1.5px solid var(--primary); /* Stronger border for better definition */
+  box-shadow: 0 10px 30px rgba(0, 163, 255, 0.1);
+}
+
 /* same shimmer sweep as Hire Me */
 .btn-work::before {
   content: '';
@@ -357,8 +369,12 @@ h1, h2, h3 {
     black 0%,
     transparent 100%
   );
-  opacity: 0.8;
+  opacity: var(--dots-opacity, 0.8);
   transition: opacity 0.3s ease;
+}
+
+[data-theme='light'] .dots-bright {
+  --dots-opacity: 0.3;
 }
 
 /* =========================================
