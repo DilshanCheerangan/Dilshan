@@ -359,9 +359,9 @@ h1, h2, h3 {
 }
 
 [data-theme='light'] .bg-sparkles {
-  background-image: radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.08) 0%, transparent 50%),
-                    radial-gradient(circle at 70% 80%, rgba(0, 102, 255, 0.05) 0%, transparent 60%);
-  opacity: 0.8;
+  background-image: radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.12) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 60%);
+  opacity: 0.9;
 }
 
 /* Interactive Bright Dots Overlay */
@@ -390,7 +390,7 @@ h1, h2, h3 {
 }
 
 [data-theme='light'] .dots-bright {
-  --dots-opacity: 0.6; /* Increased visibility as requested */
+  --dots-opacity: 0.85; /* Significantly boosted visibility */
 }
 
 /* =========================================
