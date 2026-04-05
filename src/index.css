@@ -406,7 +406,7 @@ h1, h2, h3 {
 
   /* Hero Section Stacking */
   .hero-container {
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     padding: 0 5%;
     height: auto;
@@ -414,20 +414,23 @@ h1, h2, h3 {
   }
 
   .hero-content {
-    margin-top: 15vh;
-    margin-bottom: 2rem;
+    margin-top: -10vh; /* Pulled up so it overlaps the avatar */
+    margin-bottom: 5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    position: relative;
+    z-index: 15;
   }
 
   .hero-visual {
-    margin-top: 2rem; /* space from text */
-    margin-bottom: -5vh; /* pulls to absolute bottom */
+    margin-top: 10vh; /* space from nav */
+    margin-bottom: 0;
     justify-content: center;
     width: 100%;
     position: relative;
+    z-index: 5;
   }
 
   .hero-visual::after {
