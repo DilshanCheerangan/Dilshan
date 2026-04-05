@@ -106,10 +106,13 @@ h1, h2, h3 {
   width: 90%;
   max-width: 1200px;
   z-index: 100;
-  /* Liquid Water Aesthetic */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(255, 255, 255, 0.04) 100%);
-  backdrop-filter: blur(6px) saturate(200%) contrast(110%);
-  -webkit-backdrop-filter: blur(6px) saturate(200%) contrast(110%);
+  /* Liquid Water Aesthetic with Android Safe Fallback */
+  background-color: rgba(255, 255, 255, 0.08); /* Hybrid safe baseline */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.03) 40%, rgba(255, 255, 255, 0.08) 100%);
+  backdrop-filter: blur(10px) saturate(180%) contrast(110%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%) contrast(110%);
+  transform: translateZ(0); /* Force GPU acceleration for filters on mobile */
+  will-change: backdrop-filter;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-bottom-color: rgba(255, 255, 255, 0.05);
   border-right-color: rgba(255, 255, 255, 0.05);
@@ -529,11 +532,12 @@ h1, h2, h3 {
   .nav-links.open {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(0);
-    /* Restore Liquid Water Aesthetic to Mobile Overlay */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(255, 255, 255, 0.04) 100%);
-    backdrop-filter: blur(8px) saturate(200%) contrast(110%);
-    -webkit-backdrop-filter: blur(8px) saturate(200%) contrast(110%);
+    transform: translateX(0) translateZ(0);
+    /* Restore Liquid Water Aesthetic to Mobile Overlay with Hybrid Fallback */
+    background-color: rgba(14, 21, 37, 0.85); /* Darker fallback for readability */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(14px) saturate(180%) contrast(110%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%) contrast(110%);
     border-left: 1px solid rgba(255, 255, 255, 0.15);
   }
 
@@ -815,10 +819,12 @@ h1, h2, h3 {
 }
 
 .about-stat-card {
-  /* Clear, highly refractive water effect */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(255, 255, 255, 0.04) 100%);
-  backdrop-filter: blur(6px) saturate(200%) contrast(110%);
-  -webkit-backdrop-filter: blur(6px) saturate(200%) contrast(110%);
+  /* Clear, highly refractive water effect with Safe Fallback */
+  background-color: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(255, 255, 255, 0.06) 100%);
+  backdrop-filter: blur(8px) saturate(180%) contrast(110%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%) contrast(110%);
+  transform: translateZ(0); /* Hardware hint for Android */
   
   /* Specular rim lighting mimicing water tension */
   border: 1px solid rgba(255, 255, 255, 0.25);
