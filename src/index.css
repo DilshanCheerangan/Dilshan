@@ -174,7 +174,7 @@ h1, h2, h3 {
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
   /* Modern blending: multiply makes white image background transparent */
   mix-blend-mode: multiply;
-  opacity: 1; /* Pure visibility on clean white */
+  opacity: 1; /* Fully opaque for a bold primary focus */
 }
 
 /* Hero Section */
@@ -352,9 +352,10 @@ h1, h2, h3 {
   width: auto;
   z-index: 5;
   filter: drop-shadow(0 20px 60px var(--shadow));
-  /* Circular/Radial mask for a softer 'Vignette' blend */
-  mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 85%);
-  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 85%);
+  /* Circular/Radial mask with a larger solid core (65%) for a bold feel */
+  mask-image: radial-gradient(circle at 50% 40%, black 65%, transparent 95%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 65%, transparent 95%);
+  opacity: 1; /* Ensured full opacity as requested */
   transition: filter 0.4s ease, opacity 0.4s ease;
 }
 
