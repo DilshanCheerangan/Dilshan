@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Magnetic from "@/components/ui/magnetic";
-import ThemeToggle from "@/components/ui/theme-toggle";
+import ThemeSwitch from "@/components/ui/theme-switch";
 import { RevealText } from "@/components/ui/reveal-text";
 import AboutSection from "@/components/sections/AboutSection";
 
@@ -10,17 +10,6 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [homeKey, setHomeKey] = useState(0); // Key used to re-trigger home animations
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('portfolio-theme') || 'dark';
-    }
-    return 'dark';
-  });
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('portfolio-theme', theme);
-  }, [theme]);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -97,10 +86,7 @@ const App = () => {
           <a href="#about" className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>About</a>
           <a href="#projects" className="nav-link" onClick={() => setIsMenuOpen(false)}>Projects</a>
           <a href="#blog" className="nav-link" onClick={() => setIsMenuOpen(false)}>Blog</a>
-          <ThemeToggle 
-            theme={theme} 
-            toggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
-          />
+          <ThemeSwitch />
           <a href="#hire" className="btn-hire" onClick={() => setIsMenuOpen(false)}>Hire Me</a>
         </div>
       </motion.nav>
@@ -116,10 +102,7 @@ const App = () => {
         <a href="#about" className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>About</a>
         <a href="#projects" className="nav-link" onClick={() => setIsMenuOpen(false)}>Projects</a>
         <a href="#blog" className="nav-link" onClick={() => setIsMenuOpen(false)}>Blog</a>
-        <ThemeToggle 
-          theme={theme} 
-          toggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
-        />
+        <ThemeSwitch />
         <a href="#hire" className="btn-hire" onClick={() => setIsMenuOpen(false)}>Hire Me</a>
       </div>
 
