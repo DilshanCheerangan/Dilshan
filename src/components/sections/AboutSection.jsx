@@ -1,4 +1,8 @@
 import { motion } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import SnakeBackground from './SnakeBackground';
+import { TextScramble } from '@/components/ui/text-scramble';
+
 
 const stats = [
   { value: "2+", label: "Years Building" },
@@ -14,9 +18,7 @@ const paragraphs = [
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
-  },
+  visible: { transition: { staggerChildren: 0.2, delayChildren: 0.1 } },
 };
 
 const itemVariants = {
@@ -24,19 +26,91 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
 };
 
+const SpotlightHeading = ({ variants }) => {
+  const containerRef = useRef(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    // Detect touch capability to handle mobile visual overrides
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
+    const handleMouseMove = (e) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        });
+      }
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  return (
+    <motion.div 
+      ref={containerRef}
+      className="about-spotlight-container"
+      variants={variants}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <TextScramble className="about-heading about-heading-dim" as="h2">
+        ABOUT ME
+      </TextScramble>
+      <motion.div
+        className="about-spotlight-reveal"    
+        style={{
+          WebkitMaskImage: isTouch 
+            ? 'none' 
+            : `radial-gradient(circle 120px at ${mousePosition.x}px ${mousePosition.y}px, black 30%, transparent 80%)`,
+          maskImage: isTouch 
+            ? 'none' 
+            : `radial-gradient(circle 120px at ${mousePosition.x}px ${mousePosition.y}px, black 30%, transparent 80%)`,
+        }}
+        animate={isTouch ? {
+          opacity: [0.7, 1, 0.7],
+        } : {
+          opacity: isHovered ? 1 : 0
+        }}
+        transition={isTouch ? {
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        } : {
+          duration: 0.3
+        }}
+      >
+        <h2 className="about-heading about-heading-glow">
+          ABOUT ME
+        </h2>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export default function AboutSection() {
+
   return (
     <section id="about" className="about-section">
 
-      {/* ── Animated Background Orbs ── */}
-      <div className="about-orb about-orb--1" />
-      <div className="about-orb about-orb--2" />
-      <div className="about-orb about-orb--3" />
+      {/* ── Wave projecting UPWARDS from the top of the section ── */}
+      <div className="about-wave-top">
+        <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+          <path 
+            className="about-wave-fill"
+            d="M0,150 L1440,150 L1440,50 C1320,100 1200,10 1000,60 C800,110 600,20 400,80 C200,140 0,60 0,60 Z" 
+          />
+        </svg>
+      </div>
 
-      {/* ── Animated grid lines ── */}
-      <div className="about-grid" aria-hidden="true" />
+      {/* ── Background animations layer updated to the new WASD Snake ── */}
+      <div className="about-bg-layer">
+        <SnakeBackground />
+      </div>
 
-      {/* No separate divider needed — the curve is handled by clip-path in CSS */}
 
       {/* ── Main Content ── */}
       <motion.div
@@ -46,29 +120,17 @@ export default function AboutSection() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        {/* Section Label */}
-        <motion.span className="about-label" variants={itemVariants}>
-          — Who I Am
-        </motion.span>
+        <SpotlightHeading variants={itemVariants} />
 
-        {/* Heading */}
-        <motion.h2 className="about-heading" variants={itemVariants}>
-          About <span className="about-heading--accent">Me</span>
-        </motion.h2>
-
-        {/* Two-column layout on desktop */}
         <div className="about-body">
-
           {/* Bio text */}
           <motion.div className="about-bio" variants={containerVariants}>
             {paragraphs.map((para, i) => (
-              <motion.p key={i} variants={itemVariants}>
-                {para}
-              </motion.p>
+              <motion.p key={i} variants={itemVariants}>{para}</motion.p>
             ))}
           </motion.div>
 
-          {/* Stats / Highlights cards */}
+          {/* Stats cards */}
           <motion.div className="about-stats" variants={containerVariants}>
             {stats.map((s, i) => (
               <motion.div key={i} className="about-stat-card" variants={itemVariants}>
@@ -77,7 +139,6 @@ export default function AboutSection() {
               </motion.div>
             ))}
           </motion.div>
-
         </div>
       </motion.div>
     </section>

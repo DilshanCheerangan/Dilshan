@@ -8,6 +8,7 @@ import AboutSection from "@/components/sections/AboutSection";
 const App = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('portfolio-theme') || 'dark';
@@ -27,6 +28,25 @@ const App = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const aboutEl = document.getElementById('about');
+      if (aboutEl) {
+        const rect = aboutEl.getBoundingClientRect();
+        // If the About section has scrolled up to at least halfway into the viewport, it is active
+        if (rect.top <= window.innerHeight * 0.5) {
+          setActiveSection('about');
+        } else {
+          setActiveSection('home');
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Trigger once on mount
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -66,8 +86,12 @@ const App = () => {
         </button>
 
         <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-          <a href="#home" className="nav-link active" onClick={() => setIsMenuOpen(false)}>Home</a>
-          <a href="#about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</a>
+          <a href="#home" className={`nav-link ${activeSection === 'home' ? 'active' : ''}`} onClick={(e) => {
+            e.preventDefault();
+            setIsMenuOpen(false);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}>Home</a>
+          <a href="#about" className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>About</a>
           <a href="#projects" className="nav-link" onClick={() => setIsMenuOpen(false)}>Projects</a>
           <a href="#blog" className="nav-link" onClick={() => setIsMenuOpen(false)}>Blog</a>
           <ThemeToggle 
