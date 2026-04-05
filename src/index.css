@@ -106,14 +106,14 @@ h1, h2, h3 {
   width: 90%;
   max-width: 1200px;
   z-index: 100;
-  /* Deep Liquid Water Aesthetic with Safe Fallback */
-  background-color: rgba(255, 255, 255, 0.12); /* Slightly more opaque for better legibility */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.03) 40%, rgba(255, 255, 255, 0.1) 100%);
+  /* Liquid Water Aesthetic with Android Safe Fallback */
+  background-color: rgba(18, 25, 41, 0.75); /* Deep baseline always-visible fallback */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.12) 100%);
   backdrop-filter: blur(40px) saturate(220%) contrast(110%);
   -webkit-backdrop-filter: blur(40px) saturate(220%) contrast(110%);
-  transform: translateZ(0); /* Hardware hint */
+  transform: translateZ(0); /* Hardware hint for Android to prioritized blur core */
   will-change: backdrop-filter;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-bottom-color: rgba(255, 255, 255, 0.05);
   border-right-color: rgba(255, 255, 255, 0.05);
   border-radius: 50px;
@@ -516,8 +516,10 @@ h1, h2, h3 {
     height: 100vh;
     /* Theme-Aware Mobile Overlay */
     background: var(--glass);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
+    backdrop-filter: blur(10px) saturate(180%) contrast(110%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%) contrast(110%);
+    border: 1px solid var(--glass-border);
+    transform: translateZ(0); /* Hardware hint */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -532,17 +534,17 @@ h1, h2, h3 {
   .nav-links.open {
     opacity: 1;
     pointer-events: auto;
-    /* Deep Frosted Water Mobile Overlay */
-    background-color: rgba(10, 15, 30, 0.4); /* Transparent enough for glass effect to shine */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(255, 255, 255, 0.05) 100%);
+    /* Deep Frosted Water Mobile Overlay - High Contast Safe Fallback */
+    background-color: rgba(10, 15, 30, 0.85); /* Heavy fallback to ensure readability without blur */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 40%, rgba(255, 255, 255, 0.08) 100%);
     backdrop-filter: blur(60px) saturate(220%) contrast(110%);
     -webkit-backdrop-filter: blur(60px) saturate(220%) contrast(110%);
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
     transform: translateX(0) translateZ(0);
   }
 
   [data-theme='light'] .nav-links.open {
-    background-color: rgba(255, 255, 255, 0.4); /* Transparent enough for glass effect to shine */
+    background-color: rgba(255, 255, 255, 0.9); /* Heavy light-mode fallback */
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(60px) saturate(180%) contrast(110%);
     -webkit-backdrop-filter: blur(60px) saturate(180%) contrast(110%);
@@ -823,14 +825,15 @@ h1, h2, h3 {
 
 .about-stat-card {
   /* Deep Refractive Water effect with Safe Fallback */
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(18, 25, 41, 0.6); /* Heavy visible fallback */
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.1) 100%);
   backdrop-filter: blur(35px) saturate(200%) contrast(110%);
   -webkit-backdrop-filter: blur(35px) saturate(200%) contrast(110%);
-  transform: translateZ(0); /* Hardware hint for Android */
+  transform: translateZ(0); /* Hardware hint for Android to wake up filter engine */
+  will-change: backdrop-filter;
   
   /* Specular rim lighting mimicing water tension */
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-bottom-color: rgba(255, 255, 255, 0.05);
   border-right-color: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
