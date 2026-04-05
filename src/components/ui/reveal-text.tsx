@@ -68,6 +68,7 @@ export function RevealText({
               lineHeight: 0.85,
               textTransform: "uppercase",
               display: "inline-block",
+              zIndex: index, /* Ensure each letter stacks on top of the previous one */
             }}
             initial={{ 
               scale: 0,
@@ -96,7 +97,7 @@ export function RevealText({
                 color: hoveredIndex === index ? overlayColor : textColor,
                 transition: "color 0.2s ease",
                 display: "inline-block",
-                textShadow: "var(--text-shadow, 0 15px 35px rgba(0,0,0,0.9))"
+                textShadow: "var(--hero-3d-shadow, -6px 6px 15px rgba(0,0,0,0.9), -2px 2px 5px rgba(0,0,0,0.7))"
               }}
             >
               {letter}

@@ -14,6 +14,7 @@
   --glass-border: rgba(255, 255, 255, 0.08);
   --shadow: rgba(0, 0, 0, 0.4); /* Deep shadows for dark mode */
   --text-shadow: 0 15px 35px rgba(0,0,0,0.9), 0 5px 10px rgba(0,0,0,0.8);
+  --hero-3d-shadow: -6px 6px 15px rgba(0,0,0,0.9), -2px 2px 5px rgba(0,0,0,0.7);
   --primary-rgb: 0, 163, 255;
 }
 
@@ -27,6 +28,7 @@
 
   --shadow: rgba(44, 38, 37, 0.06); /* Soft warm stone shadow */
   --text-shadow: none; /* Keep text super sharp in light mode */
+  --hero-3d-shadow: -4px 4px 12px rgba(0,0,0,0.15), -2px 2px 4px rgba(0,0,0,0.08);
   --dot-color: rgba(249, 115, 22, 0.12); /* Warm orange tinted grid dots */
   --primary-rgb: 249, 115, 22; /* True Orange RGB */
 }
