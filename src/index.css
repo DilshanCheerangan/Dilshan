@@ -169,8 +169,11 @@ h1, h2, h3 {
 }
 
 [data-theme='light'] .hero-avatar {
-  filter: drop-shadow(0 20px 40px rgba(0, 102, 255, 0.15)) 
-          drop-shadow(0 10px 10px rgba(0, 102, 255, 0.1));
+  /* Reduced shadows for a cleaner, less 'trash' look */
+  filter: drop-shadow(0 15px 30px rgba(0, 102, 255, 0.08));
+  /* Modern blending: multiply makes white image background transparent */
+  mix-blend-mode: multiply;
+  opacity: 0.95; /* Slight transparency for background dot bleed-through */
 }
 
 /* Hero Section */
@@ -347,14 +350,11 @@ h1, h2, h3 {
   height: clamp(30rem, 90vh, 70rem);
   width: auto;
   z-index: 5;
-  filter: drop-shadow(0 20px 40px var(--shadow)) drop-shadow(0 10px 10px rgba(0,0,0,0.6));
-  /* Modern Blending: Mask out hard image edges */
-  mask-image: linear-gradient(to bottom, black 85%, transparent 100%),
-              linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-  mask-composite: intersect;
-  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%),
-                      linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-  -webkit-mask-composite: source-in;
+  filter: drop-shadow(0 20px 60px var(--shadow));
+  /* Circular/Radial mask for a softer 'Vignette' blend */
+  mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 85%);
+  transition: filter 0.4s ease, opacity 0.4s ease;
 }
 
 
