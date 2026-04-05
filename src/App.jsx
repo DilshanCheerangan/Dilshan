@@ -18,19 +18,19 @@ const App = () => {
   return (
     <div className="app-container">
       {/* Interactive Dot Lighting Layer */}
-      <div 
+      <div
         className="dots-bright"
         style={{
           '--mouse-x': `${mousePos.x}px`,
           '--mouse-y': `${mousePos.y}px`
         }}
       />
-      
+
       {/* Background Sparkles/Glow */}
       <div className="bg-sparkles" />
-      
+
       {/* Navbar */}
-      <motion.nav 
+      <motion.nav
         className="nav-container"
         initial={{ y: -100, opacity: 0, x: '-50%' }}
         animate={{ y: 0, opacity: 1, x: '-50%' }}
@@ -41,7 +41,7 @@ const App = () => {
         </div>
 
         {/* Hamburger Toggle */}
-        <button 
+        <button
           className={`mobile-toggle ${isMenuOpen ? 'open' : ''}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle Navigation"
@@ -64,19 +64,19 @@ const App = () => {
       <main className="hero-container">
 
         <div className="hero-content">
-          <motion.span 
+          <motion.span
             className="hero-subtitle"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            style={{ 
-              display: 'block', 
+            style={{
+              display: 'block',
               paddingLeft: '4px' // Subtle adjustment to align with the 'D' in DILSHAN
             }}
           >
             MUHAMMED
           </motion.span>
-          
+
           <RevealText
             text="DILSHAN"
             textColor="var(--primary)"
@@ -85,7 +85,7 @@ const App = () => {
             className="hero-title"
             letterDelay={0.1}
           />
-          
+
           <div className="hero-description">
             <motion.p
               initial="hidden"
@@ -98,7 +98,7 @@ const App = () => {
                 }
               }}
             >
-              {"I create exceptional web experiences".split(" ").map((word, i) => (
+              {"I’m a frontend developer focused on building fast, modern, and user-friendly web experiences.  I enjoy turning ideas into clean, interactive interfaces that feel smooth and intuitive.".split(" ").map((word, i) => (
                 <motion.span
                   key={i}
                   variants={{
@@ -111,28 +111,28 @@ const App = () => {
                 </motion.span>
               ))}
             </motion.p>
-            
+
             <div style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>
-              <motion.h3 
+              <motion.h3
                 className="hero-role"
                 initial={{ opacity: 0, letterSpacing: "-8px", filter: "blur(12px)" }}
-                animate={{ 
-                  opacity: 1, 
-                  letterSpacing: "2px", 
+                animate={{
+                  opacity: 1,
+                  letterSpacing: "2px",
                   filter: "blur(0px)",
                   scale: [1, 1.02, 1]
                 }}
-                transition={{ 
+                transition={{
                   opacity: { duration: 1.5, delay: 1.6 },
                   scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-                  ease: [0.16, 1, 0.3, 1] 
+                  ease: [0.16, 1, 0.3, 1]
                 }}
                 style={{ margin: 0 }}
               >
                 Frontend Developer
               </motion.h3>
             </div>
-            
+
             <motion.div
               style={{ marginTop: '3rem' }} // Increased margin to lower the button
               initial={{ opacity: 0, y: 20 }}
@@ -144,16 +144,16 @@ const App = () => {
           </div>
         </div>
 
-        <motion.div 
+        <motion.div
           className="hero-visual"
           initial={{ opacity: 0, scale: 0.9, x: 50 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <img 
-            src="/hero/boarderline_nobg.png" 
-            alt="Muhammed Dilshan" 
-            className="hero-avatar" 
+          <img
+            src="/hero/boarderline_nobg.png"
+            alt="Muhammed Dilshan"
+            className="hero-avatar"
           />
         </motion.div>
       </main>
