@@ -86,7 +86,8 @@ const App = () => {
           <span className="hamburger-line"></span>
         </button>
 
-        <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+        {/* Desktop Navigation Links */}
+        <div className="nav-links-desktop">
           <a href="#home" className={`nav-link ${activeSection === 'home' ? 'active' : ''}`} onClick={(e) => {
             e.preventDefault();
             setIsMenuOpen(false);
@@ -103,6 +104,24 @@ const App = () => {
           <a href="#hire" className="btn-hire" onClick={() => setIsMenuOpen(false)}>Hire Me</a>
         </div>
       </motion.nav>
+      
+      {/* ── Mobile Navigation Menu (Global Overlay) ── */}
+      <div className={`nav-links-mobile ${isMenuOpen ? 'open' : ''}`}>
+        <a href="#home" className={`nav-link ${activeSection === 'home' ? 'active' : ''}`} onClick={(e) => {
+          e.preventDefault();
+          setIsMenuOpen(false);
+          setHomeKey(prev => prev + 1); // Trigger re-animation
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}>Home</a>
+        <a href="#about" className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>About</a>
+        <a href="#projects" className="nav-link" onClick={() => setIsMenuOpen(false)}>Projects</a>
+        <a href="#blog" className="nav-link" onClick={() => setIsMenuOpen(false)}>Blog</a>
+        <ThemeToggle 
+          theme={theme} 
+          toggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
+        />
+        <a href="#hire" className="btn-hire" onClick={() => setIsMenuOpen(false)}>Hire Me</a>
+      </div>
 
       {/* ── Scroll Container ── */}
       <div className="scroll-wrapper">

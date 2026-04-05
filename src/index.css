@@ -219,6 +219,19 @@ h1, h2, h3 {
   opacity: 1; /* Fully opaque for a bold primary focus */
 }
 
+.nav-links-desktop {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-links-desktop {
+    display: none;
+  }
+}
+
 /* Hero Section */
 .hero-container {
   height: 100vh;
@@ -521,44 +534,35 @@ h1, h2, h3 {
   }
 
   /* Overlay Navigation Links */
-  .nav-links {
+  /* Mobile Navigation Menu (Global Overlay) Styling */
+  .nav-links-mobile {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    /* Theme-Aware Mobile Overlay */
-    background: var(--glass);
-    backdrop-filter: blur(10px) saturate(180%) contrast(110%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%) contrast(110%);
-    border: 1px solid var(--glass-border);
-    transform: translateZ(0); /* Hardware hint */
+    display: none; /* Hidden by default */
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2.5rem;
     opacity: 0;
     pointer-events: none;
-    transform: translateX(100%); /* Slide in from the right */
+    transform: translateX(100%);
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 100;
+    z-index: 200; /* Above navbar shell */
+    isolation: isolate;
   }
   
-  .nav-links.open {
-    /* Deep Frosted Water Mobile Overlay - Hardware Partitioned for Android */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+  .nav-links-mobile.open {
+    display: flex;
     opacity: 1;
     pointer-events: auto;
     transform: translateX(0);
     overflow: hidden;
-    isolation: isolate;
   }
 
-  .nav-links.open::before {
+  .nav-links-mobile::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -570,7 +574,7 @@ h1, h2, h3 {
     transform: translateZ(0);
   }
 
-  [data-theme='light'] .nav-links.open::before {
+  [data-theme='light'] .nav-links-mobile::before {
     background-color: rgba(255, 255, 255, 0.9);
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0%, rgba(255, 255, 255, 0.01) 40%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(60px) saturate(180%) contrast(110%);
@@ -774,13 +778,14 @@ h1, h2, h3 {
 }
 
 .about-heading-glow {
-  color: #000000 !important; /* Deep black text on hover */
+  color: #ffffff !important; /* Reverted to glowing white for Dark Mode */
   margin-bottom: 0;
-  text-shadow: 0 0 25px rgba(255, 255, 255, 0.5); /* Soft white glow so it's visible in dark mode */
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4); 
 }
 
-/* Sharp, pure black on light mode beige */
+/* Sharp black contrast for Light Mode stone background */
 [data-theme='light'] .about-heading-glow {
+  color: #000000 !important;
   text-shadow: none !important; 
 }
 
