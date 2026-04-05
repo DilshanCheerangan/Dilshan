@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import SnakeBackground from './SnakeBackground';
 import { TextScramble } from '@/components/ui/text-scramble';
@@ -28,6 +28,7 @@ const itemVariants = {
 
 const SpotlightHeading = ({ variants }) => {
   const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: false, amount: 0.3 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
@@ -57,7 +58,11 @@ const SpotlightHeading = ({ variants }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <TextScramble className="about-heading about-heading-dim" as="h2">
+      <TextScramble 
+        className="about-heading about-heading-dim" 
+        as="h2"
+        trigger={isInView}
+      >
         ABOUT ME
       </TextScramble>
       <motion.div

@@ -9,6 +9,7 @@ const App = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [homeKey, setHomeKey] = useState(0); // Key used to re-trigger home animations
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('portfolio-theme') || 'dark';
@@ -89,6 +90,7 @@ const App = () => {
           <a href="#home" className={`nav-link ${activeSection === 'home' ? 'active' : ''}`} onClick={(e) => {
             e.preventDefault();
             setIsMenuOpen(false);
+            setHomeKey(prev => prev + 1); // Trigger re-animation
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}>Home</a>
           <a href="#about" className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>About</a>
@@ -108,7 +110,10 @@ const App = () => {
         {/* ── Hero sticky wrap (About slides over it) ── */}
         <div className="hero-sticky-wrap" id="home">
           <main className="hero-container">
-            <div className="hero-content">
+            <motion.div 
+              key={homeKey}
+              className="hero-content"
+            >
               <motion.span
                 className="hero-subtitle"
                 initial={{ opacity: 0, x: -20 }}
@@ -186,7 +191,7 @@ const App = () => {
                   </Magnetic>
                 </motion.div>
               </div>
-            </div>
+            </motion.div>
 
             <motion.div
               className="hero-visual"

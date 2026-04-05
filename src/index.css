@@ -739,14 +739,14 @@ h1, h2, h3 {
 }
 
 .about-heading-glow {
-  color: #ffffff !important; /* Pure white text on hover */
+  color: #000000 !important; /* Deep black text on hover */
   margin-bottom: 0;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.4); /* Ethereal white glow */
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.5); /* Soft white glow so it's visible in dark mode */
 }
 
-/* Eclipse effect: White text with deep black shadows in Light Mode */
+/* Sharp, pure black on light mode beige */
 [data-theme='light'] .about-heading-glow {
-  text-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 0, 0, 0.4); 
+  text-shadow: none !important; 
 }
 
 
